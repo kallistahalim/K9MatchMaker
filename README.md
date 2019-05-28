@@ -41,3 +41,9 @@ PHASE 2 :
 
 PHASE 3 :
 - make it awesome?
+
+
+note :
+
+change Mongo version to 5.4.6 to work
+

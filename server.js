@@ -1,6 +1,7 @@
 const express = require("express");
 const mongoose = require("mongoose");
 const bodyParser = require('body-parser');
+const routes = require("./routes");
 
 const app = express();
 const PORT = process.env.PORT || 3001;
@@ -26,7 +27,7 @@ const db = require('./config/keys').mongoURI;
  .catch(err => console.log(err));
 
 // Add routes, both API and view
-// app.get('/', (req, res) => res.send('root'));
+app.use(routes);
 
 // Start the API server - updated to ES6
 app.listen(PORT, () => console.log(`🌎 ==> API Server now listening on PORT ${PORT}`));

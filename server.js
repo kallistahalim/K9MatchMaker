@@ -26,7 +26,7 @@ const db = require('./config/keys').mongoURI;
  .catch(err => console.log(err));
 
 // Add routes, both API and view
-app.get('/', (req, res) => res.send('root'));
+// app.get('/', (req, res) => res.send('root'));
 
 // Start the API server - updated to ES6
 app.listen(PORT, () => console.log(`🌎 ==> API Server now listening on PORT ${PORT}`));

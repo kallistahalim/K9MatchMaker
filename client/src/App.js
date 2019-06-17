@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 // import { BrowserRouter as Router, Route } from 'react-router-dom';
 import HomePage from './pages/Home';
+import Navbar from './components/layout/Navbar'
 
 
 // import Navbar from './components/Navbar';
@@ -13,12 +14,14 @@ import HomePage from './pages/Home';
 
 import './App.css';
 
-function App() {
-  return (
-    <div>
-      <HomePage />
-    </div>
-  )
+class App extends Component {
+  render() {
+    return (
+      <div className="App">
+        <Navbar />
+      </div>
+    )
+  }
 }
 
 // class App extends Component { 

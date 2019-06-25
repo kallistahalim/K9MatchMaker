@@ -1,17 +1,19 @@
 import React, { Component } from 'react';
 // import { Container } from "../components/Grid";
-// import Jumbotron from "../components/Jumbotron"
+import Jumbotron from "../components/Jumbotron"
 // import "./style.css";
 
 class Homepage extends Component {
     render() {
         return (
-           
-                    <div>
-                        <p>Home page in PAges</p>
-                    </div>
+            <Jumbotron >
+                <div>
+                    <p>Home page in Pages</p>
+                </div>
+            </Jumbotron>
 
-      )
+
+        )
     }
 }
 export default Homepage;

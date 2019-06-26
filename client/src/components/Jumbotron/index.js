@@ -1,5 +1,6 @@
 import React from "react";
 import "./style.css";
+import "../Grid/index"
 
 function Jumbotron({ children }) {
   return (

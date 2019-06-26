@@ -1,6 +1,6 @@
 nav {
     width: 100%;
-    font-size: 3rem;
+    font-size: 2rem;
     color: #ce22b7;
     margin-bottom: 30px;
     background-color: #c79d12;
@@ -8,13 +8,17 @@ nav {
     font-family: 'Vampiro One', cursive;
   }
   
-  
+.navbar {
+  padding: 0.5rem 14rem;
+}
+
   a {
     color: #ce22b7;
-    font-family: 'Marcellus SC', serif;
+    font-family: 'Vampiro One', cursive;
     font-size: 25px;
     margin: 0 15px;
-  
+    padding: 20px;
+
   }
   
   

@@ -1,11 +1,10 @@
-const db = require("../models");
+const db = require("../models/doginfo");
 
-// Defining methods for the booksController
+// Defining methods for the dogController
 module.exports = {
   findAll: function(req, res) {
     db.dogInfo
       .find(req.query)
-      .sort({ date: -1 })
       .then(dbModel => res.json(dbModel))
       .catch(err => res.status(422).json(err));
   },
@@ -18,7 +17,7 @@ module.exports = {
   create: function(req, res) {
     db.dogInfo
       .create(req.body)
-      .then(dbModel => res.json(dbModel))
+      .then(furFriend => res.json(furFriend))
       .catch(err => res.status(422).json(err));
   },
   update: function(req, res) {

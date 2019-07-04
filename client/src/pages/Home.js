@@ -9,14 +9,14 @@ class Homepage extends Component {
         return (
             <Jumbotron >
                 <div>
-                    <p>Home page in Pages</p>
+                    <p>Let's get you buddied up with new pup </p>
                 </div>
 
                 <form>
                     <Input name="name" placeholder="Name" />
                     <Input name="gender" placeholder="Gender" />
                     {/* <TextArea name="synopsis" placeholder="Synopsis (Optional)" /> */}
-                    <FormBtn>Submit Book</FormBtn>
+                    <FormBtn>Submit</FormBtn>
                 </form>
             </Jumbotron>
 

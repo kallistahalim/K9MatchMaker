@@ -1,0 +1,65 @@
+nav {
+    width: 100%;
+    font-size: 2rem;
+    color: #ce22b7;
+    margin-bottom: 30px;
+    background-color: #c79d12;
+    height: auto;
+    font-family: 'Vampiro One', cursive;
+  }
+  
+.navbar {
+  padding: 0.5rem 14rem;
+}
+
+  a {
+    color: #ce22b7;
+    font-family: 'Vampiro One', cursive;
+    font-size: 25px;
+    margin: 0 15px;
+    padding: 20px;
+
+  }
+  
+  
+  a:hover {
+    color: #bd3422;
+    text-decoration: none;
+  }
+  
+  nav li {
+    display: inline-block;
+    padding: 10px 0;
+    width: 25%;
+    /* text-align: center; */
+  }
+  
+  ul {
+    /* padding-left: 0px; */
+    display: flex;
+    align-items: center;
+  }
+  
+  /* Street Fighter */
+  h1#edition {
+    color: #ffffff;
+    font-family: 'Metal Mania', cursive;
+    font-size: 32px;
+    
+  }
+  
+  /* Direction */
+  p#sub {
+    font-size: 35px;
+    font-family: 'Bungee Inline', cursive;
+    color: white;
+    vertical-align: middle;
+    margin-bottom: 10px;
+    text-align: center;
+  }
+  
+  @media only screen and (max-width: 750px) {
+    #cur-sco, #top-sco {
+      font-size: 2rem;
+    }
+  }

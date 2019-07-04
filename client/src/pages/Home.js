@@ -1,7 +1,9 @@
 import React, { Component } from 'react';
 // import { Container } from "../components/Grid";
 import Jumbotron from "../components/Jumbotron"
+
 import { Input, TextArea, FormBtn } from "../components/Form";
+
 // import "./style.css";
 
 class Homepage extends Component {
@@ -11,7 +13,6 @@ class Homepage extends Component {
                 <div>
                     <p>Home page in Pages</p>
                 </div>
-
                 <form>
                     <Input name="name" placeholder="Name" />
                     <Input name="gender" placeholder="Gender" />
@@ -19,7 +20,6 @@ class Homepage extends Component {
                     <FormBtn>Submit Book</FormBtn>
                 </form>
             </Jumbotron>
-
 
         )
     }

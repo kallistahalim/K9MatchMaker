@@ -11,7 +11,10 @@ const dogSchema = new Schema({
   // `body` must be of type String
   gender: {
     type: String,
-    enum: ["male", "female"]
+    enum: ["male", "female"],
+  breed : String,
+  personality = String,
+  desc = String
 }
 });
 

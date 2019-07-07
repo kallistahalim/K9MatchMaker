@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 // import { Container } from "../components/Grid";
 import Jumbotron from "../components/Jumbotron"
-import { Input, TextArea, FormBtn } from "../components/Form";
+import { Input, FormBtn } from "../components/Form";
 import "./style.css";
 
 class Homepage extends Component {

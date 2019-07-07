@@ -13,13 +13,13 @@ const dogSchema = new Schema({
     type: String,
     enum: ["male", "female"],
   breed : String,
-  personality = String,
-  desc = String
+  personality : String,
+  desc : String
 }
 });
 
 // This creates our model from the above schema, using mongoose's model method
-const dogInfo = mongoose.model("furFriend",dogSchema);
+const Doginfo = mongoose.model("furFriend",dogSchema);
 
 // Export the dogInfo model
-module.exports = dogInfo;
+module.exports = Doginfo;

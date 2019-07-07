@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import API from "../../utils/API";
 
 export default class UsersList extends Component {
 
@@ -10,8 +11,8 @@ export default class UsersList extends Component {
         this.onSubmit = this.onSubmit.bind(this);
 
         this.state = {
-            user_name: '',
-            user_gender: '',
+            name: '',
+            gender: '',
             // user_breed: '',
             // user_personality: '',
             // user_desc: ''
@@ -20,13 +21,13 @@ export default class UsersList extends Component {
 
     onChangeUserName(e) {
         this.setState({
-            user_name: e.target.value
+            name: e.target.value
         });
     }
 
     onChangeUserGender(e) {
         this.setState({
-            user_gender: e.target.value
+            gender: e.target.value
         });
     }
 
@@ -34,25 +35,48 @@ export default class UsersList extends Component {
         e.preventDefault();
 
         console.log('New user submitted:');
-        console.log(`User name: ${this.state.user_name}`)
-        console.log(`User name: ${this.state.user_gender}`)
+        console.log(`User name: ${this.state.name}`)
+        console.log(`User gender: ${this.state.gender}`)
 
         this.setState({
-            user_name: '',
-            user_gender: ''
+            name: '',
+            gender: ''
         })
+    }
+        
+    loadInfo = () => {
+        API.getInfo()
+          .then(res =>
+            this.setState({ user : res.data, name: "", gender: "" })
+          )
+          .catch(err => console.log(err));
+      };
+
+        handleFormSubmit = event => {
+            event.preventDefault();
+            if (this.state.name && this.state.gender) {
+              API.saveInfo({
+                name: this.state.name,
+                gender: this.state.gender
+                // synopsis: this.state.synopsis
+              })
+                .then(res => this.loadInfo())
+                .catch(err => console.log(err));
+            }
+
+    
     }
 
     render() {
         return (
             <div>
                 <p>Welcome to CocoApp Create User!</p>
-                <form onSubmit={this.onSubmit}>
+                <form onClick={this.handleFormSubmit}>
                     <div className="form-group">
                         <label>Name: </label>
                         <input type="text"
                             className="form-control"
-                            value={this.state.user_name}
+                            value={this.state.name}
                             onChange={this.onChangeUserName}
                         />;
                     </div>
@@ -60,7 +84,7 @@ export default class UsersList extends Component {
                         <label>Gender: </label>
                         <input type="text"
                             className="form-control"
-                            value={this.state.user_gender}
+                            value={this.state.gender}
                             onChange={this.onChangeUserGender}
                         />;
                     </div>

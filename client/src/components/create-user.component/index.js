@@ -39,11 +39,11 @@ export default class UsersList extends Component {
         console.log(`User gender: ${this.state.user_gender}`);
 
         const newUser = {
-            user_name: this.state.user_name,
-            user_gender: this.state.user_gender.gender
+            name: this.state.user_name,
+            gender: this.state.user_gender
         }
 
-        Axios.post('http://localhost:3001', newUser)
+        Axios.post('http://localhost:3000/api/furs', newUser)
             .then(res => console.log(res.data));
 
         this.setState({
@@ -81,4 +81,3 @@ export default class UsersList extends Component {
         )
     }
 }
-

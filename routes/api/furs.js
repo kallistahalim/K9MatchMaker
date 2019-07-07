@@ -41,7 +41,8 @@ router.get('/show/:id', (req, res) => {
 // @access  Private
 router.post('/', (req, res) => {
   const newItem = new db({
-    name: req.body.name
+    name: req.body.name,
+    gender : req.body.gender
   });
 
   newItem.save().then(item => res.json(item));

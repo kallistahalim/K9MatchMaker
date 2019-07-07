@@ -13,8 +13,8 @@ const dogSchema = new Schema({
     type: String,
     enum: ["male", "female"],
   breed : String,
-  personality = String,
-  desc = String
+  personality : String,
+  desc : String
 }
 });
 

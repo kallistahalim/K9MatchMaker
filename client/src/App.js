@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-// import { BrowserRouter as Router, Route } from 'react-router-dom';
+import { BrowserRouter as Router, Route } from 'react-router-dom';
 import Home from './pages/Home'
 import Navbar from './components/layout/Navbar'
 
@@ -11,17 +11,25 @@ import Navbar from './components/layout/Navbar'
 // import Login from './pages/Login';
 // import Bands from './components/Band';
 // import Autocomplete from './components/Autocomplete';
-
+import UsersList from './components/users-list.component';
+import CreateUser from './components/create-user.component';
 import './App.css';
 
 class App extends Component {
   render() {
     return (
+      <Router>
       <div className="App">
         <Navbar />
-        <Home /> 
-
+        {/* <Home />  */}
+        <Route path='/create' component={CreateUser} />
+        <Route path='/' component={UsersList} />
+      
       </div>
+
+
+      </Router>
+      
     )
   }
 }

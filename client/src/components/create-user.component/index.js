@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import API from "../../utils/API";
+
 
 export default class UsersList extends Component {
 
@@ -35,48 +35,37 @@ export default class UsersList extends Component {
         e.preventDefault();
 
         console.log('New user submitted:');
-        console.log(`User name: ${this.state.name}`)
-        console.log(`User gender: ${this.state.gender}`)
+
+        console.log(`User name: ${this.state.user_name}`);
+        console.log(`User gender: ${this.state.user_gender}`);
+
+        const newUser = {
+            user_name: this.state.user_name,
+            user_gender: this.state.user_gender
+        }
+
+        Axios.post('http://localhost:3001', newUser)
+            .then(res => console.log(res.data));
+
 
         this.setState({
-            name: '',
-            gender: ''
+            user_name: '',
+            user_gender: ''
         })
     }
-        
-    loadInfo = () => {
-        API.getInfo()
-          .then(res =>
-            this.setState({ user : res.data, name: "", gender: "" })
-          )
-          .catch(err => console.log(err));
-      };
+ 
 
-        handleFormSubmit = event => {
-            event.preventDefault();
-            if (this.state.name && this.state.gender) {
-              API.saveInfo({
-                name: this.state.name,
-                gender: this.state.gender
-                // synopsis: this.state.synopsis
-              })
-                .then(res => this.loadInfo())
-                .catch(err => console.log(err));
-            }
-
-    
-    }
 
     render() {
         return (
             <div>
                 <p>Welcome to CocoApp Create User!</p>
-                <form onClick={this.handleFormSubmit}>
+                <form onSubmit={this.onSubmit}>
                     <div className="form-group">
                         <label>Name: </label>
                         <input type="text"
                             className="form-control"
-                            value={this.state.name}
+                            value={this.state.user_name}
                             onChange={this.onChangeUserName}
                         />;
                     </div>
@@ -84,12 +73,12 @@ export default class UsersList extends Component {
                         <label>Gender: </label>
                         <input type="text"
                             className="form-control"
-                            value={this.state.gender}
+                            value={this.state.user_gender}
                             onChange={this.onChangeUserGender}
                         />;
                     </div>
                     <div className="form-group">
-                        <input type="submit" value="Create User" className="btn btn-primary"/>
+                        <input type="submit" value="Create User" className="btn btn-primary"/>  
                     </div>
                 </form>
             </div>

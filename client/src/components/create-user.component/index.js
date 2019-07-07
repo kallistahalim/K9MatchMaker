@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import Axios from 'axios';
 
 export default class UsersList extends Component {
 
@@ -34,8 +35,16 @@ export default class UsersList extends Component {
         e.preventDefault();
 
         console.log('New user submitted:');
-        console.log(`User name: ${this.state.user_name}`)
-        console.log(`User name: ${this.state.user_gender}`)
+        console.log(`User name: ${this.state.user_name}`);
+        console.log(`User gender: ${this.state.user_gender}`);
+
+        const newUser = {
+            user_name: this.state.user_name,
+            user_gender: this.state.user_gender.gender
+        }
+
+        Axios.post('http://localhost:3001', newUser)
+            .then(res => console.log(res.data));
 
         this.setState({
             user_name: '',
@@ -65,7 +74,7 @@ export default class UsersList extends Component {
                         />;
                     </div>
                     <div className="form-group">
-                        <input type="submit" value="Create User" className="btn btn-primary"/>
+                        <input type="submit" value="Create User" className="btn btn-primary"/>  
                     </div>
                 </form>
             </div>

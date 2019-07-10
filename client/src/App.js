@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { BrowserRouter as Router, Route } from 'react-router-dom';
 import Navbar from './components/layout/Navbar'
+import Home from './pages/Home'
 
 // import Navbar from './components/Navbar';
 // import Footer from './components/Footer';
@@ -20,8 +21,9 @@ class App extends Component {
       <div className="App">
         <Navbar />
         {/* <Home />  */}
+        <Route path='/cocoapp' component={Home}/>
         <Route path='/create' component={CreateUser} />
-        <Route path='/' component={UsersList} />
+        <Route path='/users' component={UsersList} />
       
       </div>
 

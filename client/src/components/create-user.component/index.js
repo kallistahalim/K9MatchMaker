@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import Jumbotron from '../Jumbotron'
 import Axios from 'axios';
 
 export default class UsersList extends Component {
@@ -55,28 +56,32 @@ export default class UsersList extends Component {
     render() {
         return (
             <div>
-                <p>Welcome to CocoApp Create User!</p>
-                <form onSubmit={this.onSubmit}>
-                    <div className="form-group">
-                        <label>Name: </label>
-                        <input type="text"
-                            className="form-control"
-                            value={this.state.user_name}
-                            onChange={this.onChangeUserName}
-                        />;
+                <Jumbotron>
+                    <h3>Welcome to CocoApp Create User!</h3>
+                    <form onSubmit={this.onSubmit}>
+                        <div className="form-group">
+                            <label>Name: </label>
+                            <input type="text"
+                                className="form-control"
+                                value={this.state.user_name}
+                                onChange={this.onChangeUserName}
+                            />
                     </div>
-                    <div className="form-group">
-                        <label>Gender: </label>
-                        <input type="text"
-                            className="form-control"
-                            value={this.state.user_gender}
-                            onChange={this.onChangeUserGender}
-                        />;
+                        <div className="form-group">
+                            <label>Gender: </label>
+                            <input type="text"
+                                className="form-control"
+                                value={this.state.user_gender}
+                                onChange={this.onChangeUserGender}
+                            />
                     </div>
-                    <div className="form-group">
-                        <input type="submit" value="Create User" className="btn btn-primary"/>  
-                    </div>
-                </form>
+                        <div className="form-group">
+                            <input type="submit" value="Create User" className="btn btn-primary" />
+                        </div>
+                    </form>
+
+                </Jumbotron>
+
             </div>
         )
     }

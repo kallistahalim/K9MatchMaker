@@ -8,9 +8,9 @@ const Navbar = () => {
 
             <div className="icons">
                 <ul className="nav">
-                    <li><a href="/about">About</a></li>
-                    <li><a href="/search">Search</a></li>
-                    <li><a href="/match">Match</a></li>
+                    <li><a href="/cocoapp">Home</a></li>
+                    <li><a href="/create">Create</a></li>
+                    <li><a href="/users">Matches</a></li>
                 </ul>
             </div>
 

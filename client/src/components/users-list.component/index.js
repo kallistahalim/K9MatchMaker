@@ -23,7 +23,7 @@ export default class UsersList extends Component {
     componentDidMount() {
         axios.get('http:/localhost:4000/users/')
             .then(response => {
-                this.setState({users: response.data})
+                this.setState({users: [response.data]})
             })
             .catch(function (err) {
                 console.log(err);

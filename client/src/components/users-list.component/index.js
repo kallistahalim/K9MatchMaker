@@ -23,10 +23,11 @@ export default class UsersList extends Component {
     }
 
     componentDidMount() {
-        axios.get('http:/localhost:3000/users')
+        axios.get('http://localhost:3000/api/furs')
             .then(response => {
-                this.setState({ users: [response.data] })
-                console.log()
+                this.setState({ users: response.data })
+                // console.log(response.data)
+                // console.log("response: " + response)
             })
             .catch(function (err) {
                 console.log(err);

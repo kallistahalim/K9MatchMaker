@@ -6,8 +6,8 @@ import axios from 'axios';
 
 const User = props => (
     <tr>
-        <td>{props.user.name}</td>
-        <td>{props.user.gender}</td>
+        <td className={props.user.name_completed ? 'completed' : ''}>{props.user.name}</td>
+        <td className={props.user.gender_completed ? 'completed' : ''}>{props.user.gender}</td>
         <td>
             <Link to={"/edit/" + props.user._id}>Edit</Link>
         </td>

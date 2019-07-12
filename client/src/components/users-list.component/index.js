@@ -6,8 +6,8 @@ import axios from 'axios';
 
 const User = props => (
     <tr>
-        <td>{props.user.name}</td>
-        <td>{props.user.gender}</td>
+        <td className={props.user.name_completed ? 'completed' : ''}>{props.user.name}</td>
+        <td className={props.user.gender_completed ? 'completed' : ''}>{props.user.gender}</td>
         <td>
             <Link to={"/edit/" + props.user._id}>Edit</Link>
         </td>
@@ -23,10 +23,11 @@ export default class UsersList extends Component {
     }
 
     componentDidMount() {
-        axios.get('http:/localhost:3000/users')
+        axios.get('http://localhost:3000/api/furs')
             .then(response => {
-                this.setState({ users: [response.data] })
-                console.log()
+                this.setState({ users: response.data })
+                // console.log(response.data)
+                // console.log("response: " + response)
             })
             .catch(function (err) {
                 console.log(err);

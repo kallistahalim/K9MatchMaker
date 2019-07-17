@@ -17,6 +17,7 @@ export default class UsersList extends Component {
             // user_breed: '',
             // user_personality: '',
             // user_desc: ''
+            selectedFile: e.target.files[0]
         }
     }
 
@@ -53,6 +54,23 @@ export default class UsersList extends Component {
         })
     }
 
+    fileSelectedHandler = e => {
+        console.log(e.target.files[0])
+    }
+
+    fileUploadHandler = () => {
+        const fd = new FormData();
+        fd.append('image', this.state.selectedFile, this.state.selectedFile.name);
+        Axios.post('https://localhost:3000/api/furs', fd, {
+            onUploadProgress: progressEvent => {
+                console.log('Upload Progress: ' + Math.round(progressEvent.loaded / progressEvent.total * 100) + "%")
+            }
+        })
+        .then(res => {
+            console.log(res);
+        })
+    }
+
     render() {
         return (
             <div>
@@ -66,7 +84,7 @@ export default class UsersList extends Component {
                                 value={this.state.user_name}
                                 onChange={this.onChangeUserName}
                             />
-                    </div>
+                        </div>
                         <div className="form-group">
                             <label>Gender: </label>
                             <input type="text"
@@ -74,9 +92,13 @@ export default class UsersList extends Component {
                                 value={this.state.user_gender}
                                 onChange={this.onChangeUserGender}
                             />
-                    </div>
+                        </div>
+                        <div className="image">
+                            <input type="file" onChange={this.fileSelectedHandler} />
+                        </div>
                         <div className="form-group">
                             <input type="submit" value="Create User" className="btn btn-primary" />
+                            <button onClick={this.fileUploadHandler}>Upload</button>
                         </div>
                     </form>
 

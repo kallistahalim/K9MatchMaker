@@ -12,6 +12,7 @@ import Home from './pages/Home'
 // import Autocomplete from './components/Autocomplete';
 import UsersList from './components/users-list.component';
 import CreateUser from './components/create-user.component';
+import EditUser from './components/edit-user.component';
 import './App.css';
 
 class App extends Component {
@@ -24,6 +25,7 @@ class App extends Component {
         <Route path='/cocoapp' component={Home}/>
         <Route path='/create' component={CreateUser} />
         <Route path='/users' component={UsersList} />
+        <Route path='/edit/:id' component={EditUser} />
       
       </div>
 

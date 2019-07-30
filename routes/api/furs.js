@@ -30,8 +30,8 @@ router.get('/', (req, res) => {
 // @route   GET api/items
 // @desc    Get All Items
 // @access  Public
-router.get('/show/:id', (req, res) => {
-  db.findById()
+router.get('/:id', (req, res) => {
+  db.findById(req.params.id)
     .sort({ date: -1 })
     .then(items => res.json(items));
 });
@@ -46,6 +46,19 @@ router.post('/', (req, res) => {
   });
 
   newItem.save().then(item => res.json(item));
+});
+
+
+router.put('/update/:id', function (req, res) {
+  db.findByIdAndUpdate(req.params.id, {
+    $set: req.body
+  }, { new: true },function (err, response) {
+    if (err) {
+      console.log(err);
+    }
+    res.send(response);
+
+  });
 });
 
 // @route   DELETE api/items/:id

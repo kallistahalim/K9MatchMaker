@@ -1,4 +1,5 @@
 const mongoose = require("mongoose");
+const multer = require ("multer");
 
 // Save a reference to the Schema constructor
 const Schema = mongoose.Schema;

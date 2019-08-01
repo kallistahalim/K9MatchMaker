@@ -30,11 +30,5 @@ const db = require('./config/keys').mongoURI;
 // Add routes, both API and view
 app.use(routes);
 
-app.use(multer({ dest: "./upload/photo",
-  rename: function (fieldname, filename) {
-    return filename;
-  },
- }));
-
 // Start the API server - updated to ES6
 app.listen(PORT, () => console.log(`🌎 ==> API Server now listening on PORT ${PORT}`));

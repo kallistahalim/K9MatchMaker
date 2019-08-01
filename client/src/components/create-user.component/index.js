@@ -46,6 +46,7 @@ export default class UsersList extends Component {
         }
 
         Axios.post('http://localhost:3000/api/furs', newUser)
+
             .then(res => console.log(res.data));
 
         this.setState({
@@ -103,7 +104,6 @@ export default class UsersList extends Component {
                     </form>
 
                 </Jumbotron>
-
             </div>
         )
     }

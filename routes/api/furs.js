@@ -22,6 +22,16 @@ const fileFilter = (req, file, cb) => {
   }
 };
 
+const upload = multer({
+  storage: storage,
+  limits: {
+    fileSize: 1024 * 1024 * 5
+  },
+  fileFilter: fileFilter
+});
+
+
+
 // @route   GET api/items
 // @desc    Get All Items
 // @access  Public
@@ -43,9 +53,9 @@ router.get('/:id', (req, res) => {
 // @route   POST api/items
 // @desc    Create An Item
 // @access  Private
-router.post('/', (req, res) => {
+router.post('/', upload.single('image'), (req, res) => {
   const newItem = new db({
-    img : req.body.img,
+    image: req.file.path,
     name: req.body.name,
     gender : req.body.gender
   });

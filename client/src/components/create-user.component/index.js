@@ -18,7 +18,7 @@ export default class UsersList extends Component {
             // user_personality: '',
             // user_desc: ''
             // selectedFile: e.target.files[0]
-        }
+        } 
     }
 
     onChangeUserName(e) {

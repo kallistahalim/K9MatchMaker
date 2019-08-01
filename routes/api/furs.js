@@ -1,23 +1,26 @@
 const router = require("express").Router();
 const dogControllers = require("../../controllers/dogControllers");
 const db = require("../../models/doginfo");
-const fs = require ("fs");
-
-// // 
-// // Matches with "/api/furs"
-// router.route("/")
-//   .get(dogControllers.findAll)
-//   .post(dogControllers.create);
+const multer = require ("multer");
 
 
-// // Matches with "/api/furs/:id"
-// router
-//   .route("/:id")
-//   .get(dogControllers.findById)
-//   .put(dogControllers.update)
-//   .delete(dogControllers.remove);
+const storage = multer.diskStorage({
+  destination: function(req, file, cb) {
+    cb(null, './uploads/');
+  },
+  filename: function(req, file, cb) {
+    cb(null, new Date().toISOString() + file.originalname);
+  }
+});
 
-// module.exports = router;
+const fileFilter = (req, file, cb) => {
+  // reject a file
+  if (file.mimetype === 'image/jpeg' || file.mimetype === 'image/png') {
+    cb(null, true);
+  } else {
+    cb(null, false);
+  }
+};
 
 // @route   GET api/items
 // @desc    Get All Items

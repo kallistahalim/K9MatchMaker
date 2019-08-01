@@ -17,7 +17,7 @@ export default class UsersList extends Component {
             // user_breed: '',
             // user_personality: '',
             // user_desc: ''
-            selectedFile: e.target.files[0]
+            // selectedFile: e.target.files[0]
         }
     }
 

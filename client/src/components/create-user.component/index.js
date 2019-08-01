@@ -17,8 +17,8 @@ export default class UsersList extends Component {
             // user_breed: '',
             // user_personality: '',
             // user_desc: ''
-            // selectedFile: e.target.files[0]
-        } 
+            selectedFile: ''
+        }
     }
 
     onChangeUserName(e) {
@@ -32,29 +32,7 @@ export default class UsersList extends Component {
             user_gender: e.target.value
         });
     }
-
-    onSubmit(e) {
-        e.preventDefault();
-
-        console.log('New user submitted:');
-        console.log(`User name: ${this.state.user_name}`);
-        console.log(`User gender: ${this.state.user_gender}`);
-
-        const newUser = {
-            name: this.state.user_name,
-            gender: this.state.user_gender
-        }
-
-        Axios.post('http://localhost:3000/api/furs', newUser)
-
-            .then(res => console.log(res.data));
-
-        this.setState({
-            user_name: '',
-            user_gender: ''
-        })
-    }
-
+    
     fileSelectedHandler = e => {
         console.log(e.target.files[0])
     }
@@ -71,6 +49,31 @@ export default class UsersList extends Component {
             console.log(res);
         })
     }
+
+    onSubmit(e) {
+        e.preventDefault();
+
+        console.log('New user submitted:');
+        console.log(`User name: ${this.state.user_name}`);
+        console.log(`User gender: ${this.state.user_gender}`);
+        console.log('Image upload')
+
+        const newUser = {
+            name: this.state.user_name,
+            gender: this.state.user_gender
+        }
+
+        Axios.post('http://localhost:3000/api/furs', newUser)
+
+            .then(res => console.log(res.data));
+
+        this.setState({
+            user_name: '',
+            user_gender: ''
+        })
+    }
+
+    
 
     render() {
         return (

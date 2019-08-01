@@ -1,6 +1,7 @@
 const router = require("express").Router();
 const dogControllers = require("../../controllers/dogControllers");
 const db = require("../../models/doginfo");
+const fs = require ("fs");
 
 // // 
 // // Matches with "/api/furs"
@@ -30,8 +31,8 @@ router.get('/', (req, res) => {
 // @route   GET api/items
 // @desc    Get All Items
 // @access  Public
-router.get('/show/:id', (req, res) => {
-  db.findById()
+router.get('/:id', (req, res) => {
+  db.findById(req.params.id)
     .sort({ date: -1 })
     .then(items => res.json(items));
 });
@@ -41,11 +42,29 @@ router.get('/show/:id', (req, res) => {
 // @access  Private
 router.post('/', (req, res) => {
   const newItem = new db({
+    img : req.body.img,
     name: req.body.name,
     gender : req.body.gender
   });
 
+  newItem.img.data = fs.readFileSync(req.files.userPhoto.path);
+  newItem.img.contentType = image/png;
+
+
   newItem.save().then(item => res.json(item));
+});
+
+
+router.put('/update/:id', function (req, res) {
+  db.findByIdAndUpdate(req.params.id, {
+    $set: req.body
+  }, { new: true },function (err, response) {
+    if (err) {
+      console.log(err);
+    }
+    res.send(response);
+
+  });
 });
 
 // @route   DELETE api/items/:id

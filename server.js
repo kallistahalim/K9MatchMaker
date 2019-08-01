@@ -2,6 +2,7 @@ const express = require("express");
 const mongoose = require("mongoose");
 const bodyParser = require('body-parser');
 const routes = require("./routes");
+const multer = require ("multer");
 
 const app = express();
 const PORT = process.env.PORT || 3001;
@@ -28,6 +29,12 @@ const db = require('./config/keys').mongoURI;
 
 // Add routes, both API and view
 app.use(routes);
+
+app.use(multer({ dest: "./upload/photo",
+  rename: function (fieldname, filename) {
+    return filename;
+  },
+ }));
 
 // Start the API server - updated to ES6
 app.listen(PORT, () => console.log(`🌎 ==> API Server now listening on PORT ${PORT}`));

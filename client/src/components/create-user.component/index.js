@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import Jumbotron from '../Jumbotron'
 import Axios from 'axios';
+import FileUpload from '../FileUpload';
 
 export default class UsersList extends Component {
 
@@ -106,7 +107,10 @@ export default class UsersList extends Component {
                         </div>
                     </form>
 
+                    <FileUpload />
+
                 </Jumbotron>
+                
             </div>
         )
     }

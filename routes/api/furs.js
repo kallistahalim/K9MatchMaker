@@ -67,6 +67,24 @@ router.post('/', upload.single('image'), (req, res) => {
   newItem.save().then(item => res.json(item));
 });
 
+// Upload Endpoint
+router.post('/upload', (req, res) => {
+  if(req.files === null) {
+    return res.status(400).json({ msg: 'No file uploaded.'})
+  }
+
+  const file = req.files.file;
+
+  file.mv(`${__dirname}/client/public/uploads/${file.name}`, err => {
+    if(err) {
+      console.log(err);
+      return res.status(500).send(err);
+    }
+
+    res.json({ fileName: file.name, filePath: `/uploads/${file.name}`});
+  });
+});
+
 
 router.put('/update/:id', function (req, res) {
   db.findByIdAndUpdate(req.params.id, {

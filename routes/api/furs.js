@@ -3,7 +3,6 @@ const dogControllers = require("../../controllers/dogControllers");
 const db = require("../../models/doginfo");
 const multer = require ("multer");
 
-
 const storage = multer.diskStorage({
   destination: function(req, file, cb) {
     cb(null, './uploads/');
@@ -77,7 +76,7 @@ router.post('/upload', (req, res) => {
 
   file.mv(`${__dirname}/client/public/uploads/${file.name}`, err => {
     if(err) {
-      console.log(err);
+      console.log(err); 
       return res.status(500).send(err);
     }
 

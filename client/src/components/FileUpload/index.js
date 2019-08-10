@@ -3,6 +3,7 @@ import Message from '../Message'
 import Progress from '../Progress'
 import axios from 'axios';
 
+
 const FileUpload = () => {
     const [file, setFile] = useState('');
     const [filename, setFilename] = useState('Choose File');
@@ -36,7 +37,7 @@ const FileUpload = () => {
 
             setUploadedFile({ fileName, filePath });
 
-            setMessage('File Uploaded' + fileName);
+            setMessage('File Uploaded' + {fileName});
         } catch (err) {
             if (err.response.status === 500) {
                 setMessage('There was a problem with the server')

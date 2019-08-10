@@ -1,33 +1,33 @@
 const router = require("express").Router();
 const dogControllers = require("../../controllers/dogControllers");
 const db = require("../../models/doginfo");
-const multer = require ("multer");
+// const multer = require ("multer");
 
-const storage = multer.diskStorage({
-  destination: function(req, file, cb) {
-    cb(null, './uploads/');
-  },
-  filename: function(req, file, cb) {
-    cb(null, new Date().toISOString() + file.originalname);
-  }
-});
+// const storage = multer.diskStorage({
+//   destination: function(req, file, cb) {
+//     cb(null, './uploads/');
+//   },
+//   filename: function(req, file, cb) {
+//     cb(null, new Date().toISOString() + file.originalname);
+//   }
+// });
 
-const fileFilter = (req, file, cb) => {
-  // reject a file
-  if (file.mimetype === 'image/jpeg' || file.mimetype === 'image/png') {
-    cb(null, true);
-  } else {
-    cb(null, false);
-  }
-};
+// const fileFilter = (req, file, cb) => {
+//   // reject a file
+//   if (file.mimetype === 'image/jpeg' || file.mimetype === 'image/png') {
+//     cb(null, true);
+//   } else {
+//     cb(null, false);
+//   }
+// };
 
-const upload = multer({
-  storage: storage,
-  limits: {
-    fileSize: 1024 * 1024 * 5
-  },
-  fileFilter: fileFilter
-});
+// const upload = multer({
+//   storage: storage,
+//   limits: {
+//     fileSize: 1024 * 1024 * 5
+//   },
+//   fileFilter: fileFilter
+// });
 
 
 
@@ -52,16 +52,12 @@ router.get('/:id', (req, res) => {
 // @route   POST api/items
 // @desc    Create An Item
 // @access  Private
-router.post('/', upload.single('image'), (req, res) => {
+router.post('/', (req, res) => {
   const newItem = new db({
-    image: req.file.path,
+   
     name: req.body.name,
     gender : req.body.gender
   });
-
-  newItem.img.data = fs.readFileSync(req.files.userPhoto.path);
-  newItem.img.contentType = image/png;
-
 
   newItem.save().then(item => res.json(item));
 });

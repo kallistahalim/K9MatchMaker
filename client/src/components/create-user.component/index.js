@@ -1,114 +1,127 @@
-import React, { Component } from 'react';
-import Jumbotron from '../Jumbotron'
+import React, { Fragment, useState, Component } from 'react';
+import Message from '../Message'
+import Progress from '../Progress'
 import Axios from 'axios';
-import FileUpload from '../FileUpload';
+// import FileUpload from '../FileUpload';
 
-export default class UsersList extends Component {
+const UsersList = () => {
+    const [file, setFile] = useState('');
+    const [user_name, onChangeUserName] = useState('');
+    const [user_gender, onChangeUserGender] = useState('');
+    const [filename, setFilename] = useState('Choose File');
+    const [uploadedFile, setUploadedFile] = useState({})
+    const [message, setMessage] = useState()
+    const [uploadPercentage, setUploadPercentage] = useState(0)
 
-    constructor(props) {
-        super(props);
 
-        this.onChangeUserName = this.onChangeUserName.bind(this);
-        this.onChangeUserGender = this.onChangeUserGender.bind(this);
-        this.onSubmit = this.onSubmit.bind(this);
-
-        this.state = {
-            user_name: '',
-            user_gender: '',
-            // user_breed: '',
-            // user_personality: '',
-            // user_desc: ''
-            selectedFile: ''
-        }
+    const onChangeUserName1 = (e) => {
+        onChangeUserName(e.target.value)
     }
 
-    onChangeUserName(e) {
-        this.setState({
-            user_name: e.target.value
-        });
+    const onChangeUserGender1 = (e) => {
+        onChangeUserGender(e.target.value)
     }
 
-    onChangeUserGender(e) {
-        this.setState({
-            user_gender: e.target.value
-        });
+
+
+    const onChange = e => {
+        setFile(e.target.files[0]);
+        setFilename(e.target.files[0].name);
+        // onChangeUserName(e.target.value);
+        // onChangeUserGender(e.target.value);
     }
 
-    onSubmit(e) {
+    const onSubmit = async e => {
         e.preventDefault();
 
         console.log('New user submitted:');
-        console.log(`User name: ${this.state.user_name}`);
-        console.log(`User gender: ${this.state.user_gender}`);
+        console.log(`User name: ${user_name}`);
+        console.log(`User gender: ${user_gender}`);
 
-        const newUser = {
-            name: this.state.user_name,
-            gender: this.state.user_gender
-        }
+        const formData = new FormData();
+        formData.append('file', file);
+        formData.append('user name', user_name);
+        formData.append('user gender', user_gender);
+        console.log(file)
 
-        Axios.post('http://localhost:3000/api/furs', newUser)
+        try {
+            const res = await Axios.post('http://localhost:3000/api/furs', formData, {
 
-            .then(res => console.log(res.data));
 
-        this.setState({
-            user_name: '',
-            user_gender: ''
-        })
-    }
+                headers: {
+                    'Content-Type': 'multipart/form-data'
+                },
+                onUploadProgress: progressEvent => {
+                    setUploadPercentage(parseInt(Math.round((progressEvent.loaded * 100) / progressEvent.total)))
+                    // Clear percentage
+                    setTimeout(() => setUploadPercentage(0), 10000)
+                }
+            });
 
-    fileSelectedHandler = e => {
-        console.log(e.target.files[0])
-    }
+            console.log(res.data)
 
-    fileUploadHandler = () => {
-        const fd = new FormData();
-        fd.append('image', this.state.selectedFile, this.state.selectedFile.name);
-        Axios.post('http://localhost:3000/api/furs', fd, {
-            onUploadProgress: progressEvent => {
-                console.log('Upload Progress: ' + Math.round(progressEvent.loaded / progressEvent.total * 100) + "%")
+            const { fileName, filePath } = res.data;
+
+            setUploadedFile({ fileName, filePath });
+
+            setMessage('File Uploaded' + fileName);
+
+        } catch (err) {
+            if (err) {
+                setMessage('There was a problem with the server')
+            } else {
+                setMessage(err.response.data.msg);
             }
-        })
-        .then(res => {
-            console.log(res);
-        })
+
+        }
     }
 
-    render() {
-        return (
-            <div>
-                <Jumbotron>
-                    <h3>Welcome to CocoApp Create User!</h3>
-                    <form onSubmit={this.onSubmit}>
-                        <div className="form-group">
-                            <label>Name: </label>
-                            <input type="text"
-                                className="form-control"
-                                value={this.state.user_name}
-                                onChange={this.onChangeUserName}
-                            />
-                        </div>
-                        <div className="form-group">
-                            <label>Gender: </label>
-                            <input type="text"
-                                className="form-control"
-                                value={this.state.user_gender}
-                                onChange={this.onChangeUserGender}
-                            />
-                        </div>
-                        <div className="image">
-                            <input type="file" onChange={this.fileSelectedHandler} />
-                        </div>
-                        <div className="form-group">
-                            <input type="submit" value="Create User" className="btn btn-primary" />
-                            <button onClick={this.fileUploadHandler}>Upload</button>
-                        </div>
-                    </form>
 
-                    <FileUpload />
 
-                </Jumbotron>
-                
-            </div>
-        )
-    }
+    return (
+        <Fragment>
+            <h3>Welcome to CocoApp Create User!</h3>
+            {message ? <Message msg={message} /> : null}
+            <form onSubmit={onSubmit}>
+                <div className="form-group">
+                    <label>Name: </label>
+                    <input type="text"
+                        className="form-control"
+                        onChange={onChangeUserName1}
+                    />
+                </div>
+                <div className="form-group">
+                    <label>Gender: </label>
+                    <input type="text"
+                        className="form-control"
+                        onChange={onChangeUserGender1}
+                    />
+                </div>
+
+
+                <div className="custom-file">
+                    <input type="file" className="custom-file-input" id="customFile" onChange={onChange} />
+                    <label className="custom-file-label" for="customFile">{filename}</label>
+                </div>
+
+                <Progress percentage={uploadPercentage} />
+
+                <div className="form-group">
+                    <input type="submit" value="Create User" className="btn btn-primary" />
+                </div>
+            </form>
+
+            {uploadedFile ? <div className='row mt-5'>
+                <div className='col-md-5 m-auto'>
+                    <h3 className='text-center'>{uploadedFile.fileName}</h3>
+                    <img style={{ width: '100%' }} src={uploadedFile.filePath} alt='' />
+                </div>
+            </div> : null}
+
+        </Fragment>
+
+
+    )
 }
+
+export default UsersList;

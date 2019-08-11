@@ -1,5 +1,5 @@
 import React, { Fragment, useState } from 'react';
-import Message from '../message'
+import Message from '../Message'
 import Progress from '../Progress'
 import axios from 'axios';
 
@@ -23,7 +23,7 @@ const FileUpload = () => {
         console.log(file)
 
         try {
-            const res = await axios.post('http://localhost:3000/upload', formData, {
+            const res = await axios.post('http://localhost:3000/api/furs/upload', formData, {
 
 
                 headers: {
@@ -36,7 +36,7 @@ const FileUpload = () => {
                 }
             });
 
-            console.log(res)
+            console.log(res.data)
 
             const { fileName, filePath } = res.data;
 

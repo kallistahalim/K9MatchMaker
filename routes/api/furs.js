@@ -2,6 +2,7 @@ const router = require("express").Router();
 const dogControllers = require("../../controllers/dogControllers");
 const db = require("../../models/doginfo");
 
+
 // @route   GET api/items
 // @desc    Get All Items
 // @access  Public
@@ -23,18 +24,31 @@ router.get('/:id', (req, res) => {
 // @route   POST api/items
 // @desc    Create An Item
 // @access  Private
-router.post('/', upload.single('image'), (req, res) => {
+router.post('/', (req, res) => {
   const newItem = new db({
-    image: req.file.path,
     name: req.body.name,
     gender : req.body.gender
   });
 
-  newItem.img.data = fs.readFileSync(req.files.userPhoto.path);
-  newItem.img.contentType = image/png;
-
-
   newItem.save().then(item => res.json(item));
+});
+
+// Upload Endpoint
+router.post('/upload', (req, res) => {
+  if(req.files === null) {
+    return res.status(400).json({ msg: 'No file uploaded.'})
+  }
+
+  const file = req.files.file;
+
+  file.mv(`${__dirname}/client/public/uploads/${file.name}`, err => {
+    if(err) {
+      console.log(err); 
+      return res.status(500).send(err);
+    }
+
+    res.json({ fileName: file.name, filePath: `/uploads/${file.name}`});
+  });
 });
 
 

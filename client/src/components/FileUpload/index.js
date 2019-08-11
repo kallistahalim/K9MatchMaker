@@ -20,11 +20,12 @@ const FileUpload = () => {
         e.preventDefault();
         const formData = new FormData();
         formData.append('file', file);
-
         console.log(file)
 
         try {
             const res = await axios.post('http://localhost:3000/upload', formData, {
+
+
                 headers: {
                     'Content-Type': 'multipart/form-data'
                 },
@@ -42,6 +43,7 @@ const FileUpload = () => {
             setUploadedFile({ fileName, filePath });
 
             setMessage('File Uploaded' + fileName);
+
         } catch (err) {
             if (err) {
                 setMessage('There was a problem with the server')

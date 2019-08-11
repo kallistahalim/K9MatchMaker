@@ -1,5 +1,5 @@
 import React, { Fragment, useState } from 'react';
-import Message from '../Message'
+import Message from '../message'
 import Progress from '../Progress'
 import axios from 'axios';
 
@@ -20,11 +20,12 @@ const FileUpload = () => {
         e.preventDefault();
         const formData = new FormData();
         formData.append('file', file);
-
-        console.log(formData)
+        console.log(file)
 
         try {
-            const res = await axios.post('http://localhost:3000/api/furs/upload', formData, {
+            const res = await axios.post('http://localhost:3000/upload', formData, {
+
+
                 headers: {
                     'Content-Type': 'multipart/form-data'
                 },
@@ -35,12 +36,14 @@ const FileUpload = () => {
                 }
             });
 
+            console.log(res)
+
             const { fileName, filePath } = res.data;
-            console.log("Show this por favor: " + JSON.stringify(res.data))
 
             setUploadedFile({ fileName, filePath });
 
-            setMessage('File Uploaded' + {fileName});
+            setMessage('File Uploaded' + fileName);
+
         } catch (err) {
             if (err) {
                 setMessage('There was a problem with the server')

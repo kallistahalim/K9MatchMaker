@@ -9,4 +9,6 @@ const Progress = ({ percentage }) => {
     )
 }
 
+
 export default Progress
+

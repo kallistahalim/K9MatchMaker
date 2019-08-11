@@ -7,8 +7,6 @@ const Schema = mongoose.Schema;
 // Using the Schema constructor, create a new dogSchema object
 // This is similar to a Sequelize model
 const dogSchema = new Schema({
-  image: 
-  { type: String, required: true },
   // `name` must be of type String
   name: String,
   // `body` must be of type String

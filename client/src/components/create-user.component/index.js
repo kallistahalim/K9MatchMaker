@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import Jumbotron from '../Jumbotron'
 import Axios from 'axios';
+import FileUpload from '../FileUpload';
 
 export default class UsersList extends Component {
 
@@ -32,23 +33,6 @@ export default class UsersList extends Component {
             user_gender: e.target.value
         });
     }
-    
-    fileSelectedHandler = e => {
-        console.log(e.target.files[0])
-    }
-
-    fileUploadHandler = () => {
-        const fd = new FormData();
-        fd.append('image', this.state.selectedFile, this.state.selectedFile.name);
-        Axios.post('https://localhost:3000/api/furs', fd, {
-            onUploadProgress: progressEvent => {
-                console.log('Upload Progress: ' + Math.round(progressEvent.loaded / progressEvent.total * 100) + "%")
-            }
-        })
-        .then(res => {
-            console.log(res);
-        })
-    }
 
     onSubmit(e) {
         e.preventDefault();
@@ -56,7 +40,6 @@ export default class UsersList extends Component {
         console.log('New user submitted:');
         console.log(`User name: ${this.state.user_name}`);
         console.log(`User gender: ${this.state.user_gender}`);
-        console.log('Image upload')
 
         const newUser = {
             name: this.state.user_name,
@@ -73,7 +56,22 @@ export default class UsersList extends Component {
         })
     }
 
-    
+    fileSelectedHandler = e => {
+        console.log(e.target.files[0])
+    }
+
+    fileUploadHandler = () => {
+        const fd = new FormData();
+        fd.append('image', this.state.selectedFile, this.state.selectedFile.name);
+        Axios.post('http://localhost:3000/api/furs', fd, {
+            onUploadProgress: progressEvent => {
+                console.log('Upload Progress: ' + Math.round(progressEvent.loaded / progressEvent.total * 100) + "%")
+            }
+        })
+        .then(res => {
+            console.log(res);
+        })
+    }
 
     render() {
         return (
@@ -106,7 +104,10 @@ export default class UsersList extends Component {
                         </div>
                     </form>
 
+                    <FileUpload />
+
                 </Jumbotron>
+                
             </div>
         )
     }

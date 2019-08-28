@@ -25,21 +25,12 @@ router.get('/:id', (req, res) => {
 // @desc    Create An Item
 // @access  Private
 router.post('/', (req, res) => {
-  const newItem = new db({
-    name: req.body.name,
-    gender : req.body.gender
-  });
-
-  newItem.save().then(item => res.json(item));
-});
-
-// Upload Endpoint
-router.post('/upload', (req, res) => {
   if(req.files === null) {
     return res.status(400).json({ msg: 'No file uploaded.'})
   }
 
   const file = req.files.file;
+
 
   file.mv(`././client/public/uploads/${file.name}`, err => {
     if(err) {
@@ -49,6 +40,20 @@ router.post('/upload', (req, res) => {
 
     res.json({ fileName: file.name, filePath: `/uploads/${file.name}`});
   });
+
+  console.log(req.files.name)
+
+  const newItem = new db({
+    name: req.files.name,
+    gender : req.files.gender
+  });
+
+  newItem.save().then(item => res.json(item));
+});
+
+// Upload Endpoint
+router.post('/upload', (req, res) => {
+  
 });
 
 

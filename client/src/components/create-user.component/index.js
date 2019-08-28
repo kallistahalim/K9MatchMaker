@@ -98,7 +98,6 @@ const UsersList = () => {
                     />
                 </div>
 
-
                 <div className="custom-file">
                     <input type="file" className="custom-file-input" id="customFile" onChange={onChange} />
                     <label className="custom-file-label" for="customFile">{filename}</label>

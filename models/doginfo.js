@@ -19,7 +19,7 @@ const dogSchema = new Schema({
 });
 
 // This creates our model from the above schema, using mongoose's model method
-const Doginfo = mongoose.model("furFriend",dogSchema);
+const Doginfo = mongoose.model("furFriends",dogSchema);
 
 // Export the dogInfo model
 module.exports = Doginfo;

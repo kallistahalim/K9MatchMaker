@@ -3,6 +3,10 @@ const dogControllers = require("../../controllers/dogControllers");
 const db = require("../../models/doginfo");
 
 
+const multer = require("multer");
+const GridFsStorage = require("multer-gridfs-storage");
+
+
 // @route   GET api/items
 // @desc    Get All Items
 // @access  Public
@@ -51,9 +55,31 @@ router.post('/', (req, res) => {
   newItem.save().then(item => res.json(item));
 });
 
+
+const storage = new GridFsStorage({
+  url: db,
+  file: (req, file) => {
+    return new Promise((resolve, reject) => {
+      crypto.randomBytes(16, (err, buf) => {
+        if (err) {
+          return reject(err);
+        }
+        const filename =
+          buf.toString("hex") + path.extname(file.originalname);
+        const fileInfo = {
+          filename: filename,
+          bucketName: "furFriends"
+        };
+        resolve(fileInfo);
+      });
+    });
+  }
+});
+const upload = multer({ storage });
+
 // Upload Endpoint
-router.post('/upload', (req, res) => {
-  
+router.post('/upload', upload.single('file'), (req, res) => {
+  res.json({file: req.file});
 });
 
 
